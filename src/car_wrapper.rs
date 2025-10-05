@@ -36,9 +36,9 @@ impl AICar {
             rays: DVector::zeros(RAY_COUNT),
             since_last_raycast: 3.0,
             fitness: 5.0,
-            next_cp: 1,
+            next_cp: 2,
             is_dead: false,
-            to_live: 8.0,
+            to_live: 20.0,
             time_per_cp: 4.0,
         }
     }

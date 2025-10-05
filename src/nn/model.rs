@@ -3,11 +3,11 @@ use nalgebra::DVector;
 use crate::nn::{linear::Linear, activators::Tanh};
 #[derive(Clone)]
 pub struct Model<const INPUT: usize, const OUTPUT: usize> {
-    l1: Linear<INPUT, 15>,
-    a1: Tanh<15, 15>,
+    l1: Linear<INPUT, 10>,
+    a1: Tanh<10, 10>,
     // l2: Linear<15, 10>,
     // a2: Tanh<10, 10>,
-    l3: Linear<15, OUTPUT>,
+    l3: Linear<10, OUTPUT>,
     a3: Tanh<OUTPUT, OUTPUT>,
 }
 

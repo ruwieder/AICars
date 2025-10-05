@@ -42,7 +42,7 @@ async fn main() {
         aicars.par_iter_mut().for_each(|aicar| {
                 aicar.update(&track, dt);
         });
-        for i in 0..CAR_COUNT.min(1000) {
+        for i in 0..CAR_COUNT.min(100) {
             aicars[i as usize].draw();
         }
         avg_fitness = evolution_step(&mut aicars, &mut dead_pickup).unwrap_or(avg_fitness);
@@ -76,12 +76,12 @@ fn evolution_step(cars: &mut Vec<AICar>, dead_pickup: &mut u8) -> Option<f32> {
     }
     let avg_fitness = total_fitness / count as f32;
     for i in dead_indices {
+        let parent1 = select_parent(cars);
         if cars[i].fitness <= avg_fitness + 800.0 {
-            let parent1 = select_parent(cars);
-            // let parent2 = select_parent(&cars);
-            cars[i] = AICar::new_from_parents(parent1, None);
+            let parent2 = select_parent(cars);
+            cars[i] = AICar::new_from_parents(parent1, Some(parent2));
         } else {
-            cars[i] = AICar::init_with_model(cars[i].model.clone());
+            cars[i] = AICar::new_from_parents(parent1, None);
         }
     };
     
