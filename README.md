@@ -40,7 +40,7 @@ A high-performance simulation of AI-controlled cars navigating a track using neu
 ```bash
 # Clone the repository
 git clone https://github.com/ruwieder/AICars.git
-cd ai-car-simulation
+cd AICars/
 
 # Build and run
 cargo run
