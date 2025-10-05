@@ -111,8 +111,8 @@ impl AICar {
     
     pub fn new_from_parents(parent1: &Self, parent2: Option<&Self>) -> Self {
         let mut model = parent1.model.clone();
-        if parent2.is_some() {
-            model.crossover(&parent2.unwrap().model, 0.5);
+        if let Some(other) = parent2 {
+            model.crossover(&other.model, 0.5);
         }
         model.mutate(0.03);
         Self::init_with_model(model)

@@ -1,5 +1,4 @@
 use std::f32::consts::PI;
-use std::f32::EPSILON;
 
 use macroquad::prelude::*;
 
@@ -170,7 +169,7 @@ impl Track {
         for &(a, b) in segments {
             let v = (b.0 - a.0, b.1 - a.1);
             let denom = dir.0 * v.1 - dir.1 * v.0;
-            if denom.abs() < EPSILON { continue; }
+            if denom.abs() < f32::EPSILON { continue; }
             let w = (a.0 - start.0, a.1 - start.1);
             let t_ray = (w.0 * v.1 - w.1 * v.0) / denom;
             let t_segment = (w.0 * dir.1 - w.1 * dir.0) / denom;

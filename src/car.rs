@@ -57,8 +57,7 @@ impl Car {
         for i in 0..RAY_COUNT {
             let angle = self.angle - width / 2.0 + i as f32 * d_angle;
             let t = track.raycast_boundaries(self.pos, angle);
-            if t.is_some() {
-                let t = t.unwrap();
+            if let Some(t) = t {
                 res[i] = t;
                 if DRAW_RAYS{
                     draw_line(
