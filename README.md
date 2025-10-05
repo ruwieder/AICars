@@ -2,6 +2,8 @@
 
 [AI Car Simulation]
 
+![AI Car Simulation](./screenshot.png)
+
 A high-performance simulation of AI-controlled cars navigating a track using neural networks and genetic algorithms. The system evolves car AI through natural selection, where successful cars produce offspring with improved driving abilities.
 
 ## Features
