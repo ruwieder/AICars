@@ -42,7 +42,7 @@ async fn main() {
         aicars.par_iter_mut().for_each(|aicar| {
                 aicar.update(&track, dt);
         });
-        for i in 0..CAR_COUNT.max(1000) {
+        for i in 0..CAR_COUNT.min(1000) {
             aicars[i as usize].draw();
         }
         avg_fitness = evolution_step(&mut aicars, &mut dead_pickup).unwrap_or(avg_fitness);
