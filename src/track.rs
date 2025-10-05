@@ -140,28 +140,7 @@ impl Track {
         }
     }
     
-    // pub fn check_checkpoint(&self, line: ((f32, f32), (f32, f32)), checkpoint: usize) -> bool {
-    //     lines_overlap(
-    //         self.inner_points[checkpoint], 
-    //         self.outer_points[checkpoint], 
-    //         line.0,
-    //         line.1 
-    //     )
-    // }
-
-    
     pub fn raycast_boundaries(&self, start: (f32, f32), angle: f32) -> Option<f32> {
-        // let mut segments = vec![((0f32, 0f32), (0f32, 0f32)); POINT_COUNT];
-        // for i in 0..POINT_COUNT {
-        //     let next = ((i as i32 + 1 + POINT_COUNT as i32) % POINT_COUNT as i32) as usize;
-        //     segments[i] = (self.inner_points[i], self.inner_points[next]);
-        // };
-        // let inner = self._raycast(start, angle, &segments);
-        // for i in 0..POINT_COUNT {
-        //     let next = ((i as i32 + 1 + POINT_COUNT as i32) % POINT_COUNT as i32) as usize;
-        //     segments[i] = (self.outer_points[i], self.outer_points[next]);
-        // };
-        // let outer = self._raycast(start, angle, &segments);
         let inner = self._raycast(start, angle, &self.inner_segments);
         let outer = self._raycast(start, angle, &self.outer_segments);
         if inner.is_none() {
@@ -201,30 +180,4 @@ impl Track {
         }
         if closest_t == f32::INFINITY { None } else {Some(closest_t)}
     }
-}
-
-
-#[allow(dead_code)]
-fn lines_overlap(
-    a1: (f32, f32),
-    a2: (f32, f32),
-    b1: (f32, f32),
-    b2: (f32, f32)
-) -> bool {
-    let da = (a2.0 - a1.0, a2.1 - a1.1);
-    let db = (b2.0 - b1.0, b2.1 - b1.1);
-    if da.0 * da.0 + da.1 * da.1 < 1e-6 { return false; }
-    if db.0 * db.0 + db.1 * db.1 < 1e-6 { return false; }
-    let d1 = (b1.0 - a1.0, b1.1 - a1.1);
-    let cross1 = d1.0 * da.1 - d1.1 * da.0;
-    let d2 = (b2.0 - a1.0, b2.1 - a1.1);
-    let cross2 = d2.0 * da.1 - d2.1 * da.0;
-    if cross1.abs() > 1e-6 || cross2.abs() > 1e-6 { return false; }
-    let tb1 = d1.0 * da.0 + d1.1 * da.1;
-    let tb2 = d2.0 * da.0 + d2.1 * da.1;
-    let len2_a = da.0 * da.0 + da.1 * da.1;
-    let (t_low, t_high) = if tb1 < tb2 { (tb1, tb2) } else { (tb2, tb1) };
-    let overlap_low = t_low.max(0.0);
-    let overlap_high = t_high.min(len2_a);
-    overlap_low < overlap_high
 }

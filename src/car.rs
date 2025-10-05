@@ -5,27 +5,14 @@ use nalgebra::DVector;
 use crate::track::Track;
 use crate::RAY_COUNT;
 
-
-// Physical constants (all in SI units)
-// const MASS: f32 = 1500.0;        // Car mass (kg)
-// const WHEELBASE: f32 = 1.0;      // Distance between front and rear axles (m)
-// const MAX_THRUST: f32 = 5000.0;  // Maximum engine thrust (N)
-// const MAX_BRAKE: f32 = 10000.0;  // Maximum braking force (N)
-// const DRAG_COEFF: f32 = 0.35;    // Aerodynamic drag coefficient
-// const ROLLING_RESISTANCE: f32 = 150.0; // Rolling resistance force (N)
-// const MU_STATIC: f32 = 1.0;      // Static friction coefficient
-// const MU_KINETIC: f32 = 0.8;     // Kinetic friction coefficient
-// const GRAVITY: f32 = 9.81;       // Gravitational acceleration (m/s²)
-// const WHEEL_FRICTION_SCALE: f32 = 1.5; // Multiplier for wheel friction
 pub const DRAW_SCALE: f32 = 1.0;
 pub const DRAW_RAYS: bool = false;
-// const MAX_LATERAL_ACCEL: f32 = MU_STATIC * GRAVITY * WHEEL_FRICTION_SCALE;
 
 #[derive(Debug, Clone, Copy)]
 pub struct Car {
     pub pos: (f32, f32),
     pub vel: f32,
-    pub angle: f32, // Car's body orientation (radians)
+    pub angle: f32,
     pub color: Color,
 }
 

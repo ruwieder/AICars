@@ -43,12 +43,6 @@ impl AICar {
         }
     }
     
-    // pub fn respawn(&mut self) {
-    //     self.car = Car::new((300.0, 200.0));
-    //     self.next_cp = 0;
-    //     self.since_last_raycast = 3.0;
-    // }
-    
     pub fn update(&mut self, track: &Track, dt: f32) {
         if self.is_dead { return; };
         if self.car.check_collision(track) { 
@@ -69,10 +63,8 @@ impl AICar {
         data[RAY_COUNT + 1] = self.since_last_raycast;
         let result = self.model.forward(&data);
         if result[2] > 0.0 {
-            // let width = (result[3] / 2.0 + 0.5).clamp(0.3, 1.5);
             let width = PI;
             self.rays = self.car.raycast(track, width);
-            // self.fitness -= 0.05;
             self.to_live -= 0.05;
             self.since_last_raycast = 0.0;
         };
@@ -109,20 +101,19 @@ impl AICar {
                 self.time_per_cp *= 0.75;
             }
             self.to_live += self.time_per_cp;
-            // self.fitness += 100.0 * (1.0 + self.to_live).powf(0.1);
             self.fitness += 100.0;
         }
     }
     
     pub fn draw(&self) {
         self.car.draw();
-        // draw_text(&self.next_cp.to_string(), self.car.pos.0, self.car.pos.1 - 15.0, 20.0, PINK);
     }
     
-    // pub fn new_from_parents(parent1: &Self, parent2: &Self) -> Self {
-    pub fn new_from_parents(parent1: &Self) -> Self {
+    pub fn new_from_parents(parent1: &Self, parent2: Option<&Self>) -> Self {
         let mut model = parent1.model.clone();
-        // model.crossover(&parent2.model, 0.5);
+        if parent2.is_some() {
+            model.crossover(&parent2.unwrap().model, 0.5);
+        }
         model.mutate(0.03);
         Self::init_with_model(model)
     }
