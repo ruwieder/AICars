@@ -93,10 +93,6 @@ impl Track {
     
     pub fn draw(&self) {
         for i in 0..POINT_COUNT {
-            draw_text(
-                &i.to_string(), 
-                self.anchors[i].0 + 10.0, 
-                self.anchors[i].1, 20.0, WHITE);
             draw_line(
                 self.inner_points[i].0, 
                 self.inner_points[i].1, 

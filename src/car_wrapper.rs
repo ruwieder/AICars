@@ -66,6 +66,7 @@ impl AICar {
             let width = PI;
             self.rays = self.car.raycast(track, width);
             self.to_live -= 0.05;
+            self.fitness -= 0.001;
             self.since_last_raycast = 0.0;
         };
         self.since_last_raycast += dt;
